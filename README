@@ -3,7 +3,6 @@
 #+DATE: 28 MARCH 2012
 
  *NAME: DEEPAK KATHAYAT*
- *ROLL NO: 201121213*
 
 * Code Organisation
 There are five files in total,each containing one or more classes,corresponding to different objects used in the game.
