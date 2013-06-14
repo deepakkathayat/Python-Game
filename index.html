@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>ROBOT BOMB DEFUSER</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="ROBOT BOMB DEFUSER"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="28 MARCH 2012"/>
+<meta name="author" content="DEEPAK KATHAYAT"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">ROBOT BOMB DEFUSER</h1>
+
+<p> <b>NAME: DEEPAK KATHAYAT</b>
+ <b>ROLL NO: 201121213</b>
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Code Organisation</a></li>
+<li><a href="#sec-2">2 Code Decomposition</a></li>
+<li><a href="#sec-3">3 201101213-robot.py</a>
+<ul>
+<li><a href="#sec-3-1">3.1 curses.wrapper</a></li>
+<li><a href="#sec-3-2">3.2 main()</a></li>
+<li><a href="#sec-3-3">3.3 set-level()</a></li>
+<li><a href="#sec-3-4">3.4 do-pause()</a></li>
+<li><a href="#sec-3-5">3.5 show-explosion()</a></li>
+<li><a href="#sec-3-6">3.6 level-specific-property()</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 game.py</a>
+<ul>
+<li><a href="#sec-4-1">4.1 class Game</a>
+<ul>
+<li><a href="#sec-4-1-1">4.1.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-4-1-2">4.1.2 -makeCD()</a></li>
+<li><a href="#sec-4-1-3">4.1.3 print-level-info()</a></li>
+<li><a href="#sec-4-1-4">4.1.4 tick()</a></li>
+<li><a href="#sec-4-1-5">4.1.5 draw()</a></li>
+<li><a href="#sec-4-1-6">4.1.6 handle-key()</a></li>
+<li><a href="#sec-4-1-7">4.1.7 add-object()</a></li>
+<li><a href="#sec-4-1-8">4.1.8 check-for-hit()</a></li>
+<li><a href="#sec-4-1-9">4.1.9 remove-dead-objects()</a></li>
+<li><a href="#sec-4-1-10">4.1.10 tickcount()</a></li>
+<li><a href="#sec-4-1-11">4.1.11 over()</a></li>
+<li><a href="#sec-4-1-12">4.1.12 -draw-panel,-draw-time,-draw-score,-draw-shield,-draw-info</a></li>
+<li><a href="#sec-4-1-13">4.1.13 game-over(),center()</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-2">4.2 class Level</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 gameobject.py</a>
+<ul>
+<li><a href="#sec-5-1">5.1 class Gameobject</a>
+<ul>
+<li><a href="#sec-5-1-1">5.1.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-5-1-2">5.1.2 draw()</a></li>
+<li><a href="#sec-5-1-3">5.1.3 -draw-normal-object()</a></li>
+<li><a href="#sec-5-1-4">5.1.4 -draw-exploding-object()</a></li>
+<li><a href="#sec-5-1-5">5.1.5 -draw-object-line()</a></li>
+<li><a href="#sec-5-1-6">5.1.6 -drawing-attribs()</a></li>
+<li><a href="#sec-5-1-7">5.1.7 tick()</a></li>
+<li><a href="#sec-5-1-8">5.1.8 is-alive()</a></li>
+<li><a href="#sec-5-1-9">5.1.9 handle-possible-hit()</a></li>
+<li><a href="#sec-5-1-10">5.1.10 play-width()</a></li>
+<li><a href="#sec-5-1-11">5.1.11 explosion-duration()</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-6">6 robot.py</a>
+<ul>
+<li><a href="#sec-6-1">6.1 class Bullet</a>
+<ul>
+<li><a href="#sec-6-1-1">6.1.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-6-1-2">6.1.2 -drawing-attribs()</a></li>
+<li><a href="#sec-6-1-3">6.1.3 tick()</a></li>
+<li><a href="#sec-6-1-4">6.1.4 is-alive()</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-2">6.2 class Robot</a>
+<ul>
+<li><a href="#sec-6-2-1">6.2.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-6-2-2">6.2.2 -drawing-attribs()</a></li>
+<li><a href="#sec-6-2-3">6.2.3 handle-key()</a></li>
+<li><a href="#sec-6-2-4">6.2.4 &ndash;do-shoot()</a></li>
+<li><a href="#sec-6-2-5">6.2.5 handle-possible-hit()</a></li>
+<li><a href="#sec-6-2-6">6.2.6 is-alive()</a></li>
+<li><a href="#sec-6-2-7">6.2.7 shield()</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-3">6.3 class Autopilot</a>
+<ul>
+<li><a href="#sec-6-3-1">6.3.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-6-3-2">6.3.2 handle-key()</a></li>
+<li><a href="#sec-6-3-3">6.3.3 tick(),-decide-leftright()</a></li>
+<li><a href="#sec-6-3-4">6.3.4 -moveleft()</a></li>
+<li><a href="#sec-6-3-5">6.3.5 -moveright()</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-7">7 objects.py</a>
+<ul>
+<li><a href="#sec-7-1">7.1 class Mine</a>
+<ul>
+<li><a href="#sec-7-1-1">7.1.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-7-1-2">7.1.2 -drawing-attribs()</a></li>
+<li><a href="#sec-7-1-3">7.1.3 explosion-duration()</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-2">7.2 class Bomb</a>
+<ul>
+<li><a href="#sec-7-2-1">7.2.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-7-2-2">7.2.2 -drawing-attribs()</a></li>
+<li><a href="#sec-7-2-3">7.2.3 explosion-duration()</a></li>
+<li><a href="#sec-7-2-4">7.2.4 draw()</a></li>
+<li><a href="#sec-7-2-5">7.2.5 -draw-normal-object()</a></li>
+<li><a href="#sec-7-2-6">7.2.6 -draw-exploding-object()</a></li>
+<li><a href="#sec-7-2-7">7.2.7 -draw-object-line()</a></li>
+<li><a href="#sec-7-2-8">7.2.8 -draw-object-exp-line()</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-3">7.3 Class Code</a>
+<ul>
+<li><a href="#sec-7-3-1">7.3.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-7-3-2">7.3.2 -drawing-attribs()</a></li>
+<li><a href="#sec-7-3-3">7.3.3 draw()</a></li>
+<li><a href="#sec-7-3-4">7.3.4 -draw-normal-object()</a></li>
+<li><a href="#sec-7-3-5">7.3.5 -draw-exploding-object()</a></li>
+<li><a href="#sec-7-3-6">7.3.6 -draw-object-line()</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-8">8 asteroid.py</a>
+<ul>
+<li><a href="#sec-8-1">8.1 class Asteroid</a>
+<ul>
+<li><a href="#sec-8-1-1">8.1.1 &ndash;init&ndash;()</a></li>
+<li><a href="#sec-8-1-2">8.1.2 -drawing-attribs()</a></li>
+<li><a href="#sec-8-1-3">8.1.3 tick()</a></li>
+<li><a href="#sec-8-1-4">8.1.4 def is-alive()</a></li>
+<li><a href="#sec-8-1-5">8.1.5 def handle-possible-hit()</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-2">8.2 class SmallAsteroid</a></li>
+<li><a href="#sec-8-3">8.3 class LargeAsteroid</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">9 Advantages</a></li>
+<li><a href="#sec-10">10 Miscelleneous</a></li>
+<li><a href="#sec-11">11 Extra features</a></li>
+<li><a href="#sec-12">12 Screenshots</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Code Organisation</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>There are five files in total,each containing one or more classes,corresponding to different objects used in the game.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Code Decomposition</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>There are in total twelve classes.Nine of them are classes for specific objects of the game, and the remaing are for implementing those classes and their methods.
+What follow are the descriptions of each file and the classes implemented in each of them along with the class methods.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 201101213-robot.py</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+  This file contains the main function, which runs the game.
+  It has the following methods:
+</p>
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> curses.wrapper</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>   Initializes curses and calls another callable object, main(), which handles the rest of my curses-using application.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> main()</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<p>   Takes in the screen/window object argument. 
+   This function runs the active game loop.
+   The game loop has its set of instructions,which includes handling the keys,check conditions for robot collisions,check conditions for Game success/failure and time-keeping instructions.
+   The 'gameset' is a list of game level objects which are created using the 'Game' class imported from 'game.py'.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> set-level()</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<p>   It initialises the variables of game level objects,depending on the PLAY MODE chosen by the player.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> do-pause()</h3>
+<div class="outline-text-3" id="text-3-4">
+
+<p>   Function to pause the game.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> show-explosion()</h3>
+<div class="outline-text-3" id="text-3-5">
+
+<p>   Function which initialises the explosion of Bombs and Mines.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> level-specific-property()</h3>
+<div class="outline-text-3" id="text-3-6">
+
+<p>   Function which contains check conditions specific to each level.
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> game.py</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>  Encapsulates the game state.
+  It imports all the classes from all the game files.
+</p>
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> class Game</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<p>  Wraps up all the game state information for the functioning of the active game.
+  Contains the following functions:
+</p>
+
+</div>
+
+<div id="outline-container-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1"><span class="section-number-4">4.1.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-4-1-1">
+
+<p>    Initialises all the game state variables and objects.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2"><span class="section-number-4">4.1.2</span> -makeCD()</h4>
+<div class="outline-text-4" id="text-4-1-2">
+
+<p>    Initialises the 'codes' object,'mines' object,'enemy' object.
+    Also calls the function to print the level information at the beginning of each level.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-3" class="outline-4">
+<h4 id="sec-4-1-3"><span class="section-number-4">4.1.3</span> print-level-info()</h4>
+<div class="outline-text-4" id="text-4-1-3">
+
+<p>    Prints the level information of each level before the corresponding level starts.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-4" class="outline-4">
+<h4 id="sec-4-1-4"><span class="section-number-4">4.1.4</span> tick()</h4>
+<div class="outline-text-4" id="text-4-1-4">
+
+<p>    It tells all the game objects to update themselves at every instance of the game.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-5" class="outline-4">
+<h4 id="sec-4-1-5"><span class="section-number-4">4.1.5</span> draw()</h4>
+<div class="outline-text-4" id="text-4-1-5">
+
+<p>    The most important of all,it draws the game screen at every instance of the game.Called from the main function.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-6" class="outline-4">
+<h4 id="sec-4-1-6"><span class="section-number-4">4.1.6</span> handle-key()</h4>
+<div class="outline-text-4" id="text-4-1-6">
+
+<p>    Handles the key presses of the player for the robot object.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-7" class="outline-4">
+<h4 id="sec-4-1-7"><span class="section-number-4">4.1.7</span> add-object()</h4>
+<div class="outline-text-4" id="text-4-1-7">
+
+<p>    Adds the game object to the gameobject list.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-8" class="outline-4">
+<h4 id="sec-4-1-8"><span class="section-number-4">4.1.8</span> check-for-hit()</h4>
+<div class="outline-text-4" id="text-4-1-8">
+
+<p>    Checks whether the game object has been hit or not.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-9" class="outline-4">
+<h4 id="sec-4-1-9"><span class="section-number-4">4.1.9</span> remove-dead-objects()</h4>
+<div class="outline-text-4" id="text-4-1-9">
+
+<p>    Removes objects that are to be removed off the screen.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-10" class="outline-4">
+<h4 id="sec-4-1-10"><span class="section-number-4">4.1.10</span> tickcount()</h4>
+<div class="outline-text-4" id="text-4-1-10">
+
+<p>    Returns the tickcount of the game.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-11" class="outline-4">
+<h4 id="sec-4-1-11"><span class="section-number-4">4.1.11</span> over()</h4>
+<div class="outline-text-4" id="text-4-1-11">
+
+<p>    Check if the robot has been destroyed.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-12" class="outline-4">
+<h4 id="sec-4-1-12"><span class="section-number-4">4.1.12</span> -draw-panel,-draw-time,-draw-score,-draw-shield,-draw-info</h4>
+<div class="outline-text-4" id="text-4-1-12">
+
+<p>    Draws the panel,time,score,shield,information of the game.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-13" class="outline-4">
+<h4 id="sec-4-1-13"><span class="section-number-4">4.1.13</span> game-over(),center()</h4>
+<div class="outline-text-4" id="text-4-1-13">
+
+<p>    Draws the 'game over message' on the screen in the end of game.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> class Level</h3>
+<div class="outline-text-3" id="text-4-2">
+
+<p>   Contains functions which initialise objects pertaining to a particular level.
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> gameobject.py</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>  Implements Gameobjects of the game and calls all their methods.
+</p>
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> class Gameobject</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<p>   Base class for most of the game elements in the game and includes methods for being updated and drawn.
+   Contains the following functions:
+</p>
+
+</div>
+
+<div id="outline-container-5-1-1" class="outline-4">
+<h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-5-1-1">
+
+<p>   Initialises the gameobject variables.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-1-2" class="outline-4">
+<h4 id="sec-5-1-2"><span class="section-number-4">5.1.2</span> draw()</h4>
+<div class="outline-text-4" id="text-5-1-2">
+
+<p>   Draws the game object at its current location.
+   The colour and other attributes an object is drawn in is determined by the value returned by -drawing-attributes();
+   derived classes can overide this.
+   The routine is also careful to make sure nothing is drawn off screen.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-3" class="outline-4">
+<h4 id="sec-5-1-3"><span class="section-number-4">5.1.3</span> -draw-normal-object()</h4>
+<div class="outline-text-4" id="text-5-1-3">
+
+<p>    Implements drawing for an object in its normal state.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-4" class="outline-4">
+<h4 id="sec-5-1-4"><span class="section-number-4">5.1.4</span> -draw-exploding-object()</h4>
+<div class="outline-text-4" id="text-5-1-4">
+
+<p>    Implements drawing for an object in its exploding state.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-5" class="outline-4">
+<h4 id="sec-5-1-5"><span class="section-number-4">5.1.5</span> -draw-object-line()</h4>
+<div class="outline-text-4" id="text-5-1-5">
+
+<p>    Draws one line for a shape of the object.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-6" class="outline-4">
+<h4 id="sec-5-1-6"><span class="section-number-4">5.1.6</span> -drawing-attribs()</h4>
+<div class="outline-text-4" id="text-5-1-6">
+
+<p>    Curses attributes to be used when drawing. Derived classes will override this.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-7" class="outline-4">
+<h4 id="sec-5-1-7"><span class="section-number-4">5.1.7</span> tick()</h4>
+<div class="outline-text-4" id="text-5-1-7">
+
+<p>    Used to update the object because of passing time.
+    Deriived classes will override it.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-8" class="outline-4">
+<h4 id="sec-5-1-8"><span class="section-number-4">5.1.8</span> is-alive()</h4>
+<div class="outline-text-4" id="text-5-1-8">
+
+<p>    Derived classes will override it.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-9" class="outline-4">
+<h4 id="sec-5-1-9"><span class="section-number-4">5.1.9</span> handle-possible-hit()</h4>
+<div class="outline-text-4" id="text-5-1-9">
+
+<p>    Checks if the object has been hit.
+    Derived objects should (as appropriate) check if they include the specified x, y coordinates and are therefore hit.
+    If they are,they should update themselves according to the damage value.The result of the update could be damaged or destroyed.
+    Derived classes will override it.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-10" class="outline-4">
+<h4 id="sec-5-1-10"><span class="section-number-4">5.1.10</span> play-width()</h4>
+<div class="outline-text-4" id="text-5-1-10">
+
+<p>    Returns width of the game screen.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-1-11" class="outline-4">
+<h4 id="sec-5-1-11"><span class="section-number-4">5.1.11</span> explosion-duration()</h4>
+<div class="outline-text-4" id="text-5-1-11">
+
+<p>    Returns the gametime at which the explosion animation for the object ends.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> robot.py</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>  Contains classes of Robot,Bullet and AutoPilot object.
+</p>
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> class Bullet</h3>
+<div class="outline-text-3" id="text-6-1">
+
+<p>   Inherits the Gameobject class.
+   Represents the bullet from the player's Robot.
+   Contains the following functions:
+</p>
+
+</div>
+
+<div id="outline-container-6-1-1" class="outline-4">
+<h4 id="sec-6-1-1"><span class="section-number-4">6.1.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-6-1-1">
+
+<p>    Initialises the co-ordinates and shape of the Bullet object.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-6-1-2" class="outline-4">
+<h4 id="sec-6-1-2"><span class="section-number-4">6.1.2</span> -drawing-attribs()</h4>
+<div class="outline-text-4" id="text-6-1-2">
+
+<p>    Returns the drawing attributes of the Bullet object.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-1-3" class="outline-4">
+<h4 id="sec-6-1-3"><span class="section-number-4">6.1.3</span> tick()</h4>
+<div class="outline-text-4" id="text-6-1-3">
+
+<p>    Tells the bullet that the game has moved on in time.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-1-4" class="outline-4">
+<h4 id="sec-6-1-4"><span class="section-number-4">6.1.4</span> is-alive()</h4>
+<div class="outline-text-4" id="text-6-1-4">
+
+<p>    Returns whether or not the object is to be deleted.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> class Robot</h3>
+<div class="outline-text-3" id="text-6-2">
+
+<p>   Represents the player's robot.Handled in many ways like any other game object in that it has a draw method,
+   knows its co-ordinates etc. However it is different in that it takes keyboard input (done by Game knowing about this
+   object directly, as well as through its game object list) rather than being driven by tick().
+   Also generates bullets.
+   Contains the following functions:
+</p>
+
+</div>
+
+<div id="outline-container-6-2-1" class="outline-4">
+<h4 id="sec-6-2-1"><span class="section-number-4">6.2.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-6-2-1">
+
+<p>    Initialises the Robot co-ordinates,shape,play area,initial direction movement.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-2-2" class="outline-4">
+<h4 id="sec-6-2-2"><span class="section-number-4">6.2.2</span> -drawing-attribs()</h4>
+<div class="outline-text-4" id="text-6-2-2">
+
+<p>    Returns the drawing attributes of the object.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-2-3" class="outline-4">
+<h4 id="sec-6-2-3"><span class="section-number-4">6.2.3</span> handle-key()</h4>
+<div class="outline-text-4" id="text-6-2-3">
+
+<p>    Takes a key press and if it means a player robot control from the user then it updates the robot appropriately.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-2-4" class="outline-4">
+<h4 id="sec-6-2-4"><span class="section-number-4">6.2.4</span> &ndash;do-shoot()</h4>
+<div class="outline-text-4" id="text-6-2-4">
+
+<p>    User is trying to fire.Currently this just causes a new bullet to be created but in the future it will consider
+    the robot's current equipment,gun status etc.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-2-5" class="outline-4">
+<h4 id="sec-6-2-5"><span class="section-number-4">6.2.5</span> handle-possible-hit()</h4>
+<div class="outline-text-4" id="text-6-2-5">
+
+<p>    Check if we've been hit by an object.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-2-6" class="outline-4">
+<h4 id="sec-6-2-6"><span class="section-number-4">6.2.6</span> is-alive()</h4>
+<div class="outline-text-4" id="text-6-2-6">
+
+<p>    Check if robot has been destroyed.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-2-7" class="outline-4">
+<h4 id="sec-6-2-7"><span class="section-number-4">6.2.7</span> shield()</h4>
+<div class="outline-text-4" id="text-6-2-7">
+
+<p>    Returns the health of the robot.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> class Autopilot</h3>
+<div class="outline-text-3" id="text-6-3">
+
+<p>    Enemy Robot controlled by the computer.
+    Provides a means of doing an automated system test, although in future this could also be used to provide a demo mode.
+    Derived from Robot object but controls the robot from the tick() method rather than keys.
+    Contains the following functions:
+</p>
+</div>
+
+<div id="outline-container-6-3-1" class="outline-4">
+<h4 id="sec-6-3-1"><span class="section-number-4">6.3.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-6-3-1">
+
+<p>    Initialises the Enemy Robot co-ordinates,shape,play area,initial direction movement.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-3-2" class="outline-4">
+<h4 id="sec-6-3-2"><span class="section-number-4">6.3.2</span> handle-key()</h4>
+<div class="outline-text-4" id="text-6-3-2">
+
+<p>    Overide this to do nothing as the computer is in control.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-3-3" class="outline-4">
+<h4 id="sec-6-3-3"><span class="section-number-4">6.3.3</span> tick(),-decide-leftright()</h4>
+<div class="outline-text-4" id="text-6-3-3">
+
+<p>    Decides where to move,randomly.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-3-4" class="outline-4">
+<h4 id="sec-6-3-4"><span class="section-number-4">6.3.4</span> -moveleft()</h4>
+<div class="outline-text-4" id="text-6-3-4">
+
+<p>    To move left.
+</p></div>
+
+</div>
+
+<div id="outline-container-6-3-5" class="outline-4">
+<h4 id="sec-6-3-5"><span class="section-number-4">6.3.5</span> -moveright()</h4>
+<div class="outline-text-4" id="text-6-3-5">
+
+<p>    To move right.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> objects.py</h2>
+<div class="outline-text-2" id="text-7">
+
+<p>  Implements classes for Codes,Bomb and Mines.
+</p>
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> class Mine</h3>
+<div class="outline-text-3" id="text-7-1">
+
+<p>   Class for Mine object.
+   Following are the functions:
+</p>
+</div>
+
+<div id="outline-container-7-1-1" class="outline-4">
+<h4 id="sec-7-1-1"><span class="section-number-4">7.1.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-7-1-1">
+
+<p>   Initialises the Mine object variables,namely its state,explosion attributes. Blacklist is the list of co-ordinates of all the objects drawn till now.
+   It helps identify an empty space on the screen for the mine/bomb/code to be drawn.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-1-2" class="outline-4">
+<h4 id="sec-7-1-2"><span class="section-number-4">7.1.2</span> -drawing-attribs()</h4>
+<div class="outline-text-4" id="text-7-1-2">
+
+<p>    Returns the drawing attributes of the Mine object.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-1-3" class="outline-4">
+<h4 id="sec-7-1-3"><span class="section-number-4">7.1.3</span> explosion-duration()</h4>
+<div class="outline-text-4" id="text-7-1-3">
+
+<p>    Returns the game time at which the explosion animation for the object ends.
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> class Bomb</h3>
+<div class="outline-text-3" id="text-7-2">
+
+<p>   Class for Bomb object.
+   Following are the functions:
+</p>
+</div>
+
+<div id="outline-container-7-2-1" class="outline-4">
+<h4 id="sec-7-2-1"><span class="section-number-4">7.2.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-7-2-1">
+
+<p>   Initialises the Bomb object variables,namely its state,explosion attributes. Blacklist is the list of co-ordinates of all the objects drawn till now.
+   It helps identify an empty space on the screen for the mine/bomb/code to be drawn.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-2-2" class="outline-4">
+<h4 id="sec-7-2-2"><span class="section-number-4">7.2.2</span> -drawing-attribs()</h4>
+<div class="outline-text-4" id="text-7-2-2">
+
+<p>    Returns the drawing attributes of the Bomb object.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-2-3" class="outline-4">
+<h4 id="sec-7-2-3"><span class="section-number-4">7.2.3</span> explosion-duration()</h4>
+<div class="outline-text-4" id="text-7-2-3">
+
+<p>    Returns the game time at which the explosion animation for the object ends.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-2-4" class="outline-4">
+<h4 id="sec-7-2-4"><span class="section-number-4">7.2.4</span> draw()</h4>
+<div class="outline-text-4" id="text-7-2-4">
+
+<p>   Draws the game object at its current location.
+   The colour and other attributes an object is drawn in is determined by the value returned by -drawing-attributes();
+   derived classes can overide this.
+   The routine is also careful to make sure nothing is drawn off screen.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-2-5" class="outline-4">
+<h4 id="sec-7-2-5"><span class="section-number-4">7.2.5</span> -draw-normal-object()</h4>
+<div class="outline-text-4" id="text-7-2-5">
+
+<p>    Implements drawing for an object in its normal state.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-2-6" class="outline-4">
+<h4 id="sec-7-2-6"><span class="section-number-4">7.2.6</span> -draw-exploding-object()</h4>
+<div class="outline-text-4" id="text-7-2-6">
+
+<p>    Implements drawing for an object in its exploding state.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-2-7" class="outline-4">
+<h4 id="sec-7-2-7"><span class="section-number-4">7.2.7</span> -draw-object-line()</h4>
+<div class="outline-text-4" id="text-7-2-7">
+
+<p>    Draws one line for a shape of the object,in its normal state.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-2-8" class="outline-4">
+<h4 id="sec-7-2-8"><span class="section-number-4">7.2.8</span> -draw-object-exp-line()</h4>
+<div class="outline-text-4" id="text-7-2-8">
+
+<p>    Draws one line for a shape of the object,in its  exploding state.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> Class Code</h3>
+<div class="outline-text-3" id="text-7-3">
+
+<p>   Class for Code object
+   Following are the functions:
+</p>
+</div>
+
+<div id="outline-container-7-3-1" class="outline-4">
+<h4 id="sec-7-3-1"><span class="section-number-4">7.3.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-7-3-1">
+
+<p>   Initialises the Code object.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-3-2" class="outline-4">
+<h4 id="sec-7-3-2"><span class="section-number-4">7.3.2</span> -drawing-attribs()</h4>
+<div class="outline-text-4" id="text-7-3-2">
+
+<p>    Returns the drawing attributes of the Code object.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-3-3" class="outline-4">
+<h4 id="sec-7-3-3"><span class="section-number-4">7.3.3</span> draw()</h4>
+<div class="outline-text-4" id="text-7-3-3">
+
+<p>   Draws the game object at its current location.
+   The colour and other attributes an object is drawn in is determined by the value returned by -drawing-attributes();
+   derived classes can overide this.
+   The routine is also careful to make sure nothing is drawn off screen.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-3-4" class="outline-4">
+<h4 id="sec-7-3-4"><span class="section-number-4">7.3.4</span> -draw-normal-object()</h4>
+<div class="outline-text-4" id="text-7-3-4">
+
+<p>    Implements drawing for an object in its normal state.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-3-5" class="outline-4">
+<h4 id="sec-7-3-5"><span class="section-number-4">7.3.5</span> -draw-exploding-object()</h4>
+<div class="outline-text-4" id="text-7-3-5">
+
+<p>    Implements drawing for an object in its exploding state.
+</p></div>
+
+</div>
+
+<div id="outline-container-7-3-6" class="outline-4">
+<h4 id="sec-7-3-6"><span class="section-number-4">7.3.6</span> -draw-object-line()</h4>
+<div class="outline-text-4" id="text-7-3-6">
+
+<p>    Draws one line for a shape of the object,in its normal state.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> asteroid.py</h2>
+<div class="outline-text-2" id="text-8">
+
+<p>  There are two variations of asteroids, small and large. As well as the obvious
+size difference, large ones take more hits.Other than that they are identical.
+</p>
+
+</div>
+
+<div id="outline-container-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> class Asteroid</h3>
+<div class="outline-text-3" id="text-8-1">
+
+<p> Base class for asteroids. Derived classes will need to provide shape.
+ Following are the functions:
+</p>
+
+</div>
+
+<div id="outline-container-8-1-1" class="outline-4">
+<h4 id="sec-8-1-1"><span class="section-number-4">8.1.1</span> &ndash;init&ndash;()</h4>
+<div class="outline-text-4" id="text-8-1-1">
+
+<p>    Set the initial position of the asteroid.
+</p></div>
+
+</div>
+
+<div id="outline-container-8-1-2" class="outline-4">
+<h4 id="sec-8-1-2"><span class="section-number-4">8.1.2</span> -drawing-attribs()</h4>
+<div class="outline-text-4" id="text-8-1-2">
+
+<p>    Returns the drawing attributes of the asteroid object.
+</p></div>
+
+</div>
+
+<div id="outline-container-8-1-3" class="outline-4">
+<h4 id="sec-8-1-3"><span class="section-number-4">8.1.3</span> tick()</h4>
+<div class="outline-text-4" id="text-8-1-3">
+
+<p>    Used to update the object because of passing time.
+</p></div>
+
+</div>
+
+<div id="outline-container-8-1-4" class="outline-4">
+<h4 id="sec-8-1-4"><span class="section-number-4">8.1.4</span> def is-alive()</h4>
+<div class="outline-text-4" id="text-8-1-4">
+
+<p>    Used to test if the object should be kept or should be deleted.
+</p></div>
+
+</div>
+
+<div id="outline-container-8-1-5" class="outline-4">
+<h4 id="sec-8-1-5"><span class="section-number-4">8.1.5</span> def handle-possible-hit()</h4>
+<div class="outline-text-4" id="text-8-1-5">
+
+<p>    Check if we've been hit by an object (e.g. bullet).
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8-2" class="outline-3">
+<h3 id="sec-8-2"><span class="section-number-3">8.2</span> class SmallAsteroid</h3>
+<div class="outline-text-3" id="text-8-2">
+
+<p>   Inherits Asteroid.
+   Implements small version of the asteroid.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-8-3" class="outline-3">
+<h3 id="sec-8-3"><span class="section-number-3">8.3</span> class LargeAsteroid</h3>
+<div class="outline-text-3" id="text-8-3">
+
+<p>   Inherits Asteroid.
+   Implements large version of the asteroid.
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Advantages</h2>
+<div class="outline-text-2" id="text-9">
+
+
+<p>
+These five files, each pertaining to a single objective, help in building a concrete organisational structure of the game.
+One has to look into only one file for carrying out a specific operation,ranging from analyzing the game flow,implementing object methods to defining object properties.
+This design of Game Programming makes it easy for a developer to conceptualize his game idea,divide his tasks and also helps other developers understand his code and work/modify it.
+</p>
+<p>
+Hence,the game source code can be successfully re-used for a different GUI or for a different game idea.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Miscelleneous</h2>
+<div class="outline-text-2" id="text-10">
+
+<p>  The program control flows in the main function, and its implementation branches out to other files and the classes in them.
+  The logic resides in the classes of the game objects.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Extra features</h2>
+<div class="outline-text-2" id="text-11">
+
+
+<ol>
+<li>Interactive GUI
+</li>
+<li>More enhanced graphical representations of the Robot,the defuse codes,the Bomb.
+</li>
+<li>Four highly engaging levels.
+</li>
+<li>Ability of the Robot to be able to shoot bullets.
+</li>
+<li>Extra obstacles in the form of Mines and Asteroids.
+</li>
+<li>A special Enemy Robot which runs itself in an automated randomized fashion,adding a challenging aspect to the game level.
+</li>
+<li>Time Limit, which adds to the challenges to be faced by the player.  
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Screenshots</h2>
+<div class="outline-text-2" id="text-12">
+
+<p>  <a href="robot-bomb-defuser1.png">Screenshot 1</a>
+  <a href="robot-bomb-defuser2.png">Screenshot 2</a>
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 28 MARCH 2012</p>
+<p class="author">Author: DEEPAK KATHAYAT</p>
+<p class="creator">Org version 7.8.03 with Emacs version 23</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

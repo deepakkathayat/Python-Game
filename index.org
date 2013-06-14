@@ -1,0 +1,300 @@
+#+TITLE: ROBOT BOMB DEFUSER
+#+AUTHOR: DEEPAK KATHAYAT
+#+DATE: 28 MARCH 2012
+
+ *NAME: DEEPAK KATHAYAT*
+ *ROLL NO: 201121213*
+
+* Code Organisation
+There are five files in total,each containing one or more classes,corresponding to different objects used in the game.
+
+* Code Decomposition
+There are in total twelve classes.Nine of them are classes for specific objects of the game, and the remaing are for implementing those classes and their methods.
+What follow are the descriptions of each file and the classes implemented in each of them along with the class methods.
+
+* 201101213-robot.py
+
+  This file contains the main function, which runs the game.
+  It has the following methods:
+** curses.wrapper
+   Initializes curses and calls another callable object, main(), which handles the rest of my curses-using application.
+
+** main()
+   Takes in the screen/window object argument. 
+   This function runs the active game loop.
+   The game loop has its set of instructions,which includes handling the keys,check conditions for robot collisions,check conditions for Game success/failure and time-keeping instructions.
+   The 'gameset' is a list of game level objects which are created using the 'Game' class imported from 'game.py'.
+
+** set-level()
+   It initialises the variables of game level objects,depending on the PLAY MODE chosen by the player.
+   
+** do-pause()
+   Function to pause the game.
+
+** show-explosion()
+   Function which initialises the explosion of Bombs and Mines.
+
+** level-specific-property()
+   Function which contains check conditions specific to each level.
+   
+   
+* game.py
+  Encapsulates the game state.
+  It imports all the classes from all the game files.
+  
+** class Game
+  Wraps up all the game state information for the functioning of the active game.
+  Contains the following functions:
+  
+*** --init--()
+    Initialises all the game state variables and objects.
+
+*** -makeCD()
+    Initialises the 'codes' object,'mines' object,'enemy' object.
+    Also calls the function to print the level information at the beginning of each level.
+
+*** print-level-info()
+    Prints the level information of each level before the corresponding level starts.
+
+*** tick()
+    It tells all the game objects to update themselves at every instance of the game.
+
+*** draw()
+    The most important of all,it draws the game screen at every instance of the game.Called from the main function.
+    
+*** handle-key()
+    Handles the key presses of the player for the robot object.
+
+*** add-object()
+    Adds the game object to the gameobject list.
+
+*** check-for-hit()
+    Checks whether the game object has been hit or not.
+
+*** remove-dead-objects()
+    Removes objects that are to be removed off the screen.
+
+*** tickcount()
+    Returns the tickcount of the game.
+
+*** over()
+    Check if the robot has been destroyed.
+
+*** -draw-panel,-draw-time,-draw-score,-draw-shield,-draw-info
+    Draws the panel,time,score,shield,information of the game.
+
+*** game-over(),center()
+    Draws the 'game over message' on the screen in the end of game.
+
+** class Level
+   Contains functions which initialise objects pertaining to a particular level.
+   
+
+* gameobject.py
+  Implements Gameobjects of the game and calls all their methods.
+  
+** class Gameobject
+   Base class for most of the game elements in the game and includes methods for being updated and drawn.
+   Contains the following functions:
+
+*** --init--()
+   Initialises the gameobject variables.
+
+*** draw()
+   Draws the game object at its current location.
+   The colour and other attributes an object is drawn in is determined by the value returned by -drawing-attributes();
+   derived classes can overide this.
+   The routine is also careful to make sure nothing is drawn off screen.
+*** -draw-normal-object()
+    Implements drawing for an object in its normal state.
+*** -draw-exploding-object()
+    Implements drawing for an object in its exploding state.
+*** -draw-object-line()
+    Draws one line for a shape of the object.
+*** -drawing-attribs()
+    Curses attributes to be used when drawing. Derived classes will override this.
+*** tick()
+    Used to update the object because of passing time.
+    Deriived classes will override it.
+*** is-alive()
+    Derived classes will override it.
+*** handle-possible-hit()
+    Checks if the object has been hit.
+    Derived objects should (as appropriate) check if they include the specified x, y coordinates and are therefore hit.
+    If they are,they should update themselves according to the damage value.The result of the update could be damaged or destroyed.
+    Derived classes will override it.
+*** play-width()
+    Returns width of the game screen.
+*** explosion-duration()
+    Returns the gametime at which the explosion animation for the object ends.
+    
+
+* robot.py
+  Contains classes of Robot,Bullet and AutoPilot object.
+
+** class Bullet
+   Inherits the Gameobject class.
+   Represents the bullet from the player's Robot.
+   Contains the following functions:
+   
+*** --init--()
+    Initialises the co-ordinates and shape of the Bullet object.
+     
+*** -drawing-attribs()
+    Returns the drawing attributes of the Bullet object.
+*** tick()
+    Tells the bullet that the game has moved on in time.
+*** is-alive()
+    Returns whether or not the object is to be deleted.
+
+** class Robot
+   Represents the player's robot.Handled in many ways like any other game object in that it has a draw method,
+   knows its co-ordinates etc. However it is different in that it takes keyboard input (done by Game knowing about this
+   object directly, as well as through its game object list) rather than being driven by tick().
+   Also generates bullets.
+   Contains the following functions:
+   
+*** --init--()
+    Initialises the Robot co-ordinates,shape,play area,initial direction movement.
+*** -drawing-attribs()
+    Returns the drawing attributes of the object.
+*** handle-key()
+    Takes a key press and if it means a player robot control from the user then it updates the robot appropriately.
+*** --do-shoot()
+    User is trying to fire.Currently this just causes a new bullet to be created but in the future it will consider
+    the robot's current equipment,gun status etc.
+*** handle-possible-hit()
+    Check if we've been hit by an object.
+*** is-alive()
+    Check if robot has been destroyed.
+*** shield()
+    Returns the health of the robot.
+
+** class Autopilot
+    Enemy Robot controlled by the computer.
+    Provides a means of doing an automated system test, although in future this could also be used to provide a demo mode.
+    Derived from Robot object but controls the robot from the tick() method rather than keys.
+    Contains the following functions:
+*** --init--()
+    Initialises the Enemy Robot co-ordinates,shape,play area,initial direction movement.
+*** handle-key()
+    Overide this to do nothing as the computer is in control.
+*** tick(),-decide-leftright()
+    Decides where to move,randomly.
+*** -moveleft()
+    To move left.
+*** -moveright()
+    To move right.
+
+
+* objects.py
+  Implements classes for Codes,Bomb and Mines.
+
+** class Mine
+   Class for Mine object.
+   Following are the functions:
+*** --init--()
+   Initialises the Mine object variables,namely its state,explosion attributes. Blacklist is the list of co-ordinates of all the objects drawn till now.
+   It helps identify an empty space on the screen for the mine/bomb/code to be drawn.
+*** -drawing-attribs()
+    Returns the drawing attributes of the Mine object.
+*** explosion-duration()
+    Returns the game time at which the explosion animation for the object ends.
+** class Bomb
+   Class for Bomb object.
+   Following are the functions:
+*** --init--()
+   Initialises the Bomb object variables,namely its state,explosion attributes. Blacklist is the list of co-ordinates of all the objects drawn till now.
+   It helps identify an empty space on the screen for the mine/bomb/code to be drawn.
+*** -drawing-attribs()
+    Returns the drawing attributes of the Bomb object.
+*** explosion-duration()
+    Returns the game time at which the explosion animation for the object ends.
+
+*** draw()
+   Draws the game object at its current location.
+   The colour and other attributes an object is drawn in is determined by the value returned by -drawing-attributes();
+   derived classes can overide this.
+   The routine is also careful to make sure nothing is drawn off screen.
+*** -draw-normal-object()
+    Implements drawing for an object in its normal state.
+*** -draw-exploding-object()
+    Implements drawing for an object in its exploding state.
+*** -draw-object-line()
+    Draws one line for a shape of the object,in its normal state.
+*** -draw-object-exp-line()
+    Draws one line for a shape of the object,in its  exploding state.
+    
+** Class Code
+   Class for Code object
+   Following are the functions:
+*** --init--()
+   Initialises the Code object.
+*** -drawing-attribs()
+    Returns the drawing attributes of the Code object.
+*** draw()
+   Draws the game object at its current location.
+   The colour and other attributes an object is drawn in is determined by the value returned by -drawing-attributes();
+   derived classes can overide this.
+   The routine is also careful to make sure nothing is drawn off screen.
+*** -draw-normal-object()
+    Implements drawing for an object in its normal state.
+*** -draw-exploding-object()
+    Implements drawing for an object in its exploding state.
+*** -draw-object-line()
+    Draws one line for a shape of the object,in its normal state.
+ 
+
+* asteroid.py
+  There are two variations of asteroids, small and large. As well as the obvious
+size difference, large ones take more hits.Other than that they are identical.
+
+** class Asteroid
+ Base class for asteroids. Derived classes will need to provide shape.
+ Following are the functions:
+ 
+*** --init--()
+    Set the initial position of the asteroid.
+*** -drawing-attribs()
+    Returns the drawing attributes of the asteroid object.
+*** tick()
+    Used to update the object because of passing time.
+*** def is-alive()
+    Used to test if the object should be kept or should be deleted.
+*** def handle-possible-hit()
+    Check if we've been hit by an object (e.g. bullet).
+
+** class SmallAsteroid
+   Inherits Asteroid.
+   Implements small version of the asteroid.
+
+** class LargeAsteroid
+   Inherits Asteroid.
+   Implements large version of the asteroid.
+
+
+* Advantages
+
+These five files, each pertaining to a single objective, help in building a concrete organisational structure of the game.
+One has to look into only one file for carrying out a specific operation,ranging from analyzing the game flow,implementing object methods to defining object properties.
+This design of Game Programming makes it easy for a developer to conceptualize his game idea,divide his tasks and also helps other developers understand his code and work/modify it.
+
+Hence,the game source code can be successfully re-used for a different GUI or for a different game idea.
+
+* Miscelleneous
+  The program control flows in the main function, and its implementation branches out to other files and the classes in them.
+  The logic resides in the classes of the game objects.
+  
+* Extra features
+  
+1. Interactive GUI
+2. More enhanced graphical representations of the Robot,the defuse codes,the Bomb.
+3. Four highly engaging levels.
+4. Ability of the Robot to be able to shoot bullets.
+5. Extra obstacles in the form of Mines and Asteroids.
+6. A special Enemy Robot which runs itself in an automated randomized fashion,adding a challenging aspect to the game level.
+7. Time Limit, which adds to the challenges to be faced by the player.  
+  
+* Screenshots
+  [[file:robot-bomb-defuser1.png][Screenshot 1]]
+  [[file:robot-bomb-defuser2.png][Screenshot 2]]
